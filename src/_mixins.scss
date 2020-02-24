@@ -1,0 +1,53 @@
+@mixin backImage($image, $height: 500px){
+    // background: url($image);
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.0)),url($image);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: $height;
+}
+
+@mixin clearfix{
+    &:before, &:after{
+        content: '';
+        display: table;
+    }
+    &:after{
+        clear: both;
+    }
+}
+// using math operator. accept number of columns and margin
+
+@mixin imageGrid($qty, $margin) {
+    width: ((100% - (($qty - 1) * $margin)) / $qty); //reduce total margin required from width
+    &:nth-child(n){
+        margin-bottom: $margin;
+        margin-right: $margin;
+    }
+    &:nth-child(#{$qty}n){  //last image
+        margin-bottom: 0;
+        margin-right: 0;
+    }
+}
+
+
+@mixin break($length) {
+    @media (min-width: $length){
+        @content;
+    }
+}
+
+
+@mixin break($args...) {
+    @if length($args) == 1 {
+        @media (min-width: nth($args, 1)) {
+            @content;
+        }
+    }
+    @if length($args) == 2 {
+        @media (min-width: nth($args, 1)) and 
+                (max-width: nth($args, 2)){
+            @content;
+        }
+    }    
+}

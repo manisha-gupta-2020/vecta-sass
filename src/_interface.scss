@@ -1,0 +1,75 @@
+
+%btn{
+    display: inline-block;
+    padding: 6px 12px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-family: $font-headings;
+    user-select: none;
+    color: $background;
+}
+
+
+
+//3 ways to set button colors. simple variables, lists, maps
+$color-btn-default: $text-color;
+$color-btn-hot: $red;
+$color-btn-cool: $blue;
+.btn-default{
+    @extend %btn;
+    background: $color-btn-default;
+}
+.btn-hot{
+    @extend %btn;
+    background: $color-btn-hot;
+}
+.btn-cool{
+    @extend %btn;
+    background: $color-btn-cool;
+}
+.grid{
+    margin-bottom: 15px;
+    @include clearfix;
+    .item{
+        float: left;
+        @include imageGrid(5, 2%);
+
+    }
+    img{
+        display: block;
+        border-radius: 10px;
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+//lists-  to use each loop, make variables with list for $color-btn-name and $clor-btn-values and loop throught them to assign background color to the buttons. This is an example of programmatically create classes
+
+// $color-btn-names: 'default', 'hot', 'cool';
+// $color-btn-values: $text-color, $red, $blue;
+
+// @each $name in $color-btn-names{
+//     $i: index($color-btn-values, $name); //set index to pick corresponding color
+//     .btn-#{$name} {
+//         @extend %btn;
+//         background-color: nth($color-btn-values, $i);
+//     }
+// }
+
+//using maps  key-value pairs to create classes for .btn-cclor
+// $color-btns: (
+//     default: $text-color,
+//     hot: $red,
+//     cool: $blue,
+//     purple: $purple
+// );
+// @each $name, $value in $color-btns{
+//     .btn-#{$name} {
+//         @extend %btn;
+//         background-color: $value;
+//     }
+// }

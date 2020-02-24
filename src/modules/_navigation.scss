@@ -1,0 +1,65 @@
+header.container{
+    background-color: darken($blue, 15%);
+}
+
+footer .container{
+    margin: 0;
+}
+nav{
+    header & {
+        background-color: darken($blue, 15%);
+    }
+    // display branding at screen width 1000 or more. apply mixin for media query
+
+    .branding{
+        float: left;
+        display: none;
+        @include break(1000px){ //content specified here will be displayed because of @content in mixin
+            display: block;  
+        }
+    }
+    .branding h1 {
+        font-size: 2.75rem;
+        overflow: hidden;
+        margin: 0;
+        color: $yellow;
+    }
+    ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        @include clearfix;
+    }
+    ul li{
+        //float the navigation items at 760, till then they are stacked for small screen display. This was changed when usng media query mixin 
+        @include break(760px){
+            float: right;
+        }
+        padding: 10px 5px;;
+    }
+    ul li a{
+        font-size: 1.75rem;
+        text-decoration: none;
+        padding: 10px 5px;;
+        color: $background;
+        &:hover {
+            color: $yellow;
+        }
+        header &:hover{
+            background-color: darken($blue, 20%);
+        }
+        footer & {
+            color: #fff;
+        }
+
+    }
+    footer{
+        // using the conditional in mixin to not display footer at all  between 0 and 500px
+        @include break(0, 500px){
+            display: none;
+        }
+        margin-top: 20px;
+        min-height: 20px;
+        background-color: darken($blue, 15%);
+    }
+}
